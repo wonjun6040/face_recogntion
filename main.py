@@ -11,7 +11,7 @@ import facenet
 class face_recognition:
     def __init__(self):
         self.model = facenet.InceptionResNetV2()
-        self.detector = dlib.get_frontal_face_detector()  # hog - svm을 이용한 얼굴 검출 모델을 사용함
+        self.detector = dlib.get_frontal_face_detector() 
         self.landmark = dlib.shape_predictor('shape_predictor_5_face_landmarks.dat')
         self.cap = cv2.VideoCapture(0)
         self.save_face = None
@@ -28,14 +28,10 @@ class face_recognition:
 
             num_faces = len(dets)
 
-            # Find the 5 face landmarks we need to do the alignment.
+            
             faces = dlib.full_object_detections()
             for detection in dets:
                 faces.append(self.landmark(img, detection))
-
-            # Get the aligned face images
-            # Optionally:
-            # images = dlib.get_face_chips(img, faces, size=160, padding=0.25)
 
             try:
                 images = dlib.get_face_chips(img, faces, size=160)
@@ -116,5 +112,5 @@ class face_recognition:
 a = face_recognition()
 a.detection()
 a.recogniton()
-#a.verification()
+a.verification()
 
